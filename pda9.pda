@@ -1,0 +1,51 @@
+alphabet: {0,1,2}
+start: q0
+accepting: {qf}
+
+q0 (_, _ -> $, qChoose)
+
+qChoose (_, $ -> $, qA0)
+qChoose (_, $ -> $, qB0)
+qChoose (_, $ -> $, qC0)
+
+qA0 (0, $ -> X$, qA0)
+qA0 (0, X -> XX, qA0)
+qA0 (1, $ -> $, qAok)
+qA0 (1, X -> _, qA1)
+
+qA1 (1, X -> _, qA1)
+qA1 (1, $ -> $, qAok)
+
+qAok (1, $ -> $, qAok)
+qAok (2, $ -> $, qAok)
+qAok (_, $ -> _, qf)
+
+qB0 (0, $ -> X$, qB0)
+qB0 (0, X -> XX, qB0)
+qB0 (1, X -> _, qB1)
+
+qB1 (1, X -> _, qB1)
+qB1 (2, X -> X, qBok)
+
+qBok (2, X -> X, qBok)
+qBok (2, $ -> $, qBok)
+qBok (_, X -> X, qf)
+qBok (_, $ -> _, qf)
+
+qC0 (0, $ -> X$, qC0)
+qC0 (0, X -> XX, qC0)
+qC0 (1, $ -> $, qC1)
+qC0 (1, X -> X, qC1)
+qC0 (2, X -> _, qC2)
+qC0 (2, $ -> $, qCok)
+
+qC1 (1, $ -> $, qC1)
+qC1 (1, X -> X, qC1)
+qC1 (2, X -> _, qC2)
+qC1 (2, $ -> $, qCok)
+
+qC2 (2, X -> _, qC2)
+qC2 (2, $ -> $, qCok)
+
+qCok (2, $ -> $, qCok)
+qCok (_, $ -> _, qf)
